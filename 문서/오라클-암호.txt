@@ -1,0 +1,63 @@
+오라클 11 XE
+
+테이블 스페이스 생성
+사용자 생성
+사용자 테이블 스페이스 연결
+해당 사용자로 로그인
+테이블 생성
+
+sqlplus
+system/111111
+
+테이블 스페이스 생성
+
+CREATE TABLESPACE TEST
+    DATAFILE 'C:\ORACLE\ORADATA\app_data.dbf' SIZE 100M
+    AUTOEXTEND ON NEXT 10M ; 
+	
+사용자 생성
+CREATE USER hskim IDENTIFIED BY 111111 DEFAULT TABLESPACE TEST ;
+	
+사용자 테이블 스페이스 연결
+GRANT connect, resource, dba TO hskim ;
+
+접속
+conn hskim/111111;
+
+테이블 목록 조회
+select * from tab;
+
+테이블 생성
+CREATE TABLE emp 
+( 
+    empno       NUMBER(4)	NOT NULL,
+    ename       VARCHAR2(10),
+    job         VARCHAR2(9),
+    mgr         NUMBER(4),
+    hiredate    DATE,
+    sal         NUMBER(7,2),
+    comm        NUMBER(7,2),
+    deptno      NUMBER(2)
+);
+
+샘플 데이터 삽입
+INSERT INTO emp VALUES(7839, 'KING', 'PRESIDENT', NULL, TO_DATE('1981-11-17', 'yyyy-mm-dd'), 5000, NULL, 10);
+INSERT INTO emp VALUES(7698, 'BLAKE', 'MANAGER', 7839, TO_DATE('1981-05-01', 'yyyy-mm-dd'), 2850, NULL, 30);
+INSERT INTO emp VALUES(7782, 'CLARK', 'MANAGER', 7839, TO_DATE('1981-06-09', 'yyyy-mm-dd'), 2450, NULL, 10);
+INSERT INTO emp VALUES(7566, 'JONES', 'MANAGER', 7839, TO_DATE('1981-04-02', 'yyyy-mm-dd'), 2975, NULL, 20);
+INSERT INTO emp VALUES(7788, 'SCOTT', 'ANALYST', 7566, TO_DATE('1987-04-19', 'yyyy-mm-dd'), 3000, NULL, 20);
+INSERT INTO emp VALUES(7902, 'FORD', 'ANALYST', 7566, TO_DATE('1981-12-03', 'yyyy-mm-dd'), 3000, NULL, 20);
+INSERT INTO emp VALUES(7369, 'SMITH', 'CLERK', 7902, TO_DATE('1980-12-17', 'yyyy-mm-dd'), 800, NULL, 20);
+INSERT INTO emp VALUES(7499, 'ALLEN', 'SALESMAN', 7698, TO_DATE('1981-02-20', 'yyyy-mm-dd'), 1600, 300, 30);
+INSERT INTO emp VALUES(7521, 'WARD', 'SALESMAN', 7698, TO_DATE('1981-02-22', 'yyyy-mm-dd'), 1250, 500, 30);
+INSERT INTO emp VALUES(7654, 'MARTIN', 'SALESMAN', 7698, TO_DATE('1981-09-28', 'yyyy-mm-dd'), 1250, 1400, 30);
+INSERT INTO emp VALUES(7844, 'TURNER', 'SALESMAN', 7698, TO_DATE('1981-09-08', 'yyyy-mm-dd'), 1500, 0, 30);
+INSERT INTO emp VALUES(7876, 'ADAMS', 'CLERK', 7788, TO_DATE('1987-05-23', 'yyyy-mm-dd'), 1100, NULL, 20);
+INSERT INTO emp VALUES(7900, 'JAMES', 'CLERK', 7698, TO_DATE('1981-12-03', 'yyyy-mm-dd'), 950, NULL, 30);
+INSERT INTO emp VALUES(7934, 'MILLER', 'CLERK', 7782, TO_DATE('1982-01-23', 'yyyy-mm-dd'), 1300, NULL, 10);
+
+커밋
+commit;
+
+
+ 
